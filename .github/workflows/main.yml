@@ -1,26 +1,36 @@
+# Name of the workflow
 name: CI Pipeline
 
+# Trigger this workflow when there is a push to the repository
 on: [push]
 
 jobs:
+  # Only job in this workflow is to run tests
+  # (More could be added if needed)
   test:
+    # Specify the virtual machine environment
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout code
+      # Step 1: Checkout the repository code so the workflow can access it
       - name: Checkout repository
-        uses: actions/checkout@v3
+        # GitHub action to pull repo code
+        uses: actions/checkout@v3  
 
-      # Step 2: Set up Python
+      # Step 2: Set up Python environment for running the project
       - name: Set up Python
-        uses: actions/setup-python@v4
+        # install Python
+        uses: actions/setup-python@v4  
         with:
-          python-version: '3.10'
+          # Specify Python version to use
+          python-version: '3.10'  
 
-      # Step 3: Install dependencies
+      # Step 3: Install required dependencies (pytest for running tests)
       - name: Install dependencies
-        run: pip install pytest
+        # Install testing framework
+        run: pip install pytest  
 
-      # Step 4: Run tests
+      # Step 4: Run all tests (unit + integration I've made)
       - name: Run tests
-        run: pytest
+        # Automatically get and runs all test files inside the Tests/ directory
+        run: pytest  
